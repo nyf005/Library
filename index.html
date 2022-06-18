@@ -11,7 +11,7 @@
   <body>
     <header class="container">
       <div id="logo">
-        <img src="#" alt="book" />
+        <img src="#" alt="Book" />
         <h1>Library</h1>
       </div>
     </header>
@@ -30,19 +30,19 @@
         </thead>
         <tbody></tbody>
       </table>
-      <form action="" method="post" id="addBookForm">
+      <form action="./index.html" method="post" id="addBookForm">
         <h2>Add Book to library</h2>
         <div class="form-group">
           <label for="title">Title</label>
-          <input id="title" name="title" type="text" />
+          <input id="title" name="title" type="text" required />
         </div>
         <div class="form-group">
           <label for="author">Author</label>
-          <input id="author" name="author" type="text" />
+          <input id="author" name="author" type="text" required />
         </div>
         <div class="form-group">
           <label for="pages">Pages</label>
-          <input id="pages" name="pages" type="num" min="0" />
+          <input id="pages" name="pages" type="number" min="0" required />
         </div>
         <div class="form-group">
           <label for="status">Have you read it?</label>
@@ -51,6 +51,7 @@
         <button type="submit">Add Book</button>
       </form>
       <button id="openFormBtn"><span>+</span></button>
+      <div id="disableBackground"></div>
     </main>
     <footer class="container">
       <p>Copyright NYF</p>

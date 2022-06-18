@@ -32,6 +32,9 @@ let myLibrary = [
 ];
 
 const tableBody = document.querySelector("tbody");
+const openFormBtn = document.getElementById("openFormBtn");
+const disableBackground = document.getElementById("disableBackground");
+const form = document.querySelector("form");
 
 function Book(title, author, pages, isRead) {
   this.title = title;
@@ -54,3 +57,13 @@ function addBookToLibray() {
 }
 
 addBookToLibray();
+
+openFormBtn.addEventListener("click", () => {
+  disableBackground.style.display = "block";
+  form.style.display = "block";
+});
+
+disableBackground.addEventListener("click", () => {
+  disableBackground.style.display = "none";
+  form.style.display = "none";
+});
