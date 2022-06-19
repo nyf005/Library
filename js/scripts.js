@@ -31,10 +31,17 @@ let myLibrary = [
   },
 ];
 
+const table = document.getElementById("booksTable");
 const tableBody = document.querySelector("tbody");
 const openFormBtn = document.getElementById("openFormBtn");
 const disableBackground = document.getElementById("disableBackground");
 const form = document.querySelector("form");
+const title = document.getElementById("title");
+const author = document.getElementById("author");
+const pages = document.getElementById("pages");
+const isRead = document.getElementById("status");
+
+displayBooks();
 
 function Book(title, author, pages, isRead) {
   this.title = title;
@@ -43,7 +50,14 @@ function Book(title, author, pages, isRead) {
   this.isRead = isRead;
 }
 
-function addBookToLibray() {
+function addBookToLibray(title, author, pages, isRead) {
+  let newBook = new Book(title, author, pages, isRead);
+  myLibrary.push(newBook);
+  displayBooks();
+}
+
+function displayBooks() {
+  tableBody.innerHTML = "";
   myLibrary.forEach((book) => {
     let row = `
     <tr>
@@ -56,7 +70,17 @@ function addBookToLibray() {
   });
 }
 
-addBookToLibray();
+function resetForm() {
+  disableBackground.style.display = "none";
+  form.style.display = "none";
+  form.reset();
+}
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  addBookToLibray(title.value, author.value, pages.value, isRead.checked);
+  resetForm();
+});
 
 openFormBtn.addEventListener("click", () => {
   disableBackground.style.display = "block";
@@ -64,7 +88,5 @@ openFormBtn.addEventListener("click", () => {
 });
 
 disableBackground.addEventListener("click", () => {
-  disableBackground.style.display = "none";
-  form.style.display = "none";
-  form.reset();
+  resetForm();
 });
