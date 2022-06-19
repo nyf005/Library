@@ -39,7 +39,7 @@ const form = document.querySelector("form");
 const title = document.getElementById("title");
 const author = document.getElementById("author");
 const pages = document.getElementById("pages");
-const isRead = document.getElementById("status");
+const isRead = document.getElementsByClassName("status");
 
 displayBooks();
 
@@ -58,15 +58,24 @@ function addBookToLibray(title, author, pages, isRead) {
 
 function displayBooks() {
   tableBody.innerHTML = "";
-  myLibrary.forEach((book) => {
-    let row = `
-    <tr>
-        <td>${book.title}</td>
-        <td>${book.author}</td>
-        <td>${book.pages}</td>
-        <td>${book.isRead ? "already read" : "not read yet"}</td>
-    </tr>`;
+
+  for (let i = 0; i < myLibrary.length; i++) {
+    let row = `<tr>
+         <td>${myLibrary[i].title}</td>
+           <td>${myLibrary[i].author}</td>
+           <td>${myLibrary[i].pages}</td>
+           <td>${myLibrary[i].isRead ? "already read" : "not read yet"}</td>
+           <td><button class="deleteBtn" data-index=${i}>X</button></td>
+       </tr>`;
     tableBody.innerHTML += row;
+  }
+
+  const deleteBtn = document.getElementsByClassName("deleteBtn");
+  Array.from(deleteBtn).forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      myLibrary.splice(e.target.getAttribute("data-index"), 1);
+      displayBooks();
+    });
   });
 }
 
