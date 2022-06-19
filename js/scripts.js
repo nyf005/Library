@@ -39,7 +39,7 @@ const form = document.querySelector("form");
 const title = document.getElementById("title");
 const author = document.getElementById("author");
 const pages = document.getElementById("pages");
-const isRead = document.getElementsByClassName("status");
+const isRead = document.getElementById("status");
 
 displayBooks();
 
@@ -64,7 +64,9 @@ function displayBooks() {
          <td>${myLibrary[i].title}</td>
            <td>${myLibrary[i].author}</td>
            <td>${myLibrary[i].pages}</td>
-           <td>${myLibrary[i].isRead ? "already read" : "not read yet"}</td>
+           <td><input class="status" type="checkbox" ${
+             myLibrary[i].isRead ? "checked" : ""
+           } /></td>
            <td><button class="deleteBtn" data-index=${i}>X</button></td>
        </tr>`;
     tableBody.innerHTML += row;
