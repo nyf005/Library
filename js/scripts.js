@@ -66,4 +66,5 @@ openFormBtn.addEventListener("click", () => {
 disableBackground.addEventListener("click", () => {
   disableBackground.style.display = "none";
   form.style.display = "none";
+  form.reset();
 });
