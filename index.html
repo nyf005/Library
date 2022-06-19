@@ -34,16 +34,41 @@
         <h3>Add a book to the library</h3>
         <hr />
         <div class="form-group">
-          <label for="title">Title</label>
-          <input id="title" name="title" type="text" required />
+          <label for="title"
+            >Title <span><strong>Required</strong></span></label
+          >
+          <input id="title" name="title" type="text" placeholder=" " required />
+          <div class="feedback">
+            <p>* Please enter the title of the book</p>
+          </div>
         </div>
         <div class="form-group">
-          <label for="author">Author</label>
-          <input id="author" name="author" type="text" required />
+          <label for="author"
+            >Author <span><strong>Required</strong></span></label
+          >
+          <input
+            id="author"
+            name="author"
+            type="text"
+            placeholder=" "
+            pattern="([A-Z])\w+"
+            required
+          />
+          <div class="feedback"><p>* Please enter a valid name</p></div>
         </div>
         <div class="form-group">
-          <label for="pages">Pages</label>
-          <input id="pages" name="pages" type="number" min="0" required />
+          <label for="pages"
+            >Pages <span><strong>Required</strong></span></label
+          >
+          <input
+            id="pages"
+            name="pages"
+            type="number"
+            min="0"
+            placeholder=" "
+            required
+          />
+          <div class="feedback"><p>* Please enter a positive number</p></div>
         </div>
         <div class="form-group">
           <label for="status">Have you read it?</label>
