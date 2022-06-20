@@ -9,5 +9,5 @@ A Library project to
 
 ## Assignment Links
 
-- [Try sign-up form here!](https://github.com/nyf005/Library)
+- [Try Library here!](https://nyf005.github.io/Library/)
 - [Link to the Assignment](https://www.theodinproject.com/lessons/node-path-javascript-library)
