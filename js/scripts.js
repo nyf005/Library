@@ -1,34 +1,26 @@
+// Create Book object constructor
+function Book(title, author, pages, isRead) {
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.isRead = isRead;
+}
+// Add function to Book prototype
+Book.prototype.toggleBookStatus = function () {
+  this.isRead = !this.isRead;
+};
+
 let myLibrary = [
-  {
-    title: "The Alchemist",
-    author: "Paulo Coelho",
-    pages: 197,
-    isRead: false,
-  },
-  {
-    title: "Animal Farm",
-    author: "George Orwell",
-    pages: 112,
-    isRead: false,
-  },
-  {
-    title: "The Art of War",
-    author: "Sun Tzu",
-    pages: 273,
-    isRead: true,
-  },
-  {
-    title: "The Book Thief",
-    author: "Markus Zusak",
-    pages: 584,
-    isRead: false,
-  },
-  {
-    title: "The Curious Incident of the Dog in the Night-Time",
-    author: "Mark Haddon",
-    pages: 274,
-    isRead: false,
-  },
+  new Book("The Alchemist", "Paulo Coelho", 197, false),
+  new Book("Animal Farm", "George Orwell", 112, false),
+  new Book("The Art of War", "Sun Tzu", 273, true),
+  new Book("The Book Thief", "Markus Zusak", 584, false),
+  new Book(
+    "The Curious Incident of the Dog in the Night-Time",
+    "Mark Haddon",
+    274,
+    false
+  ),
 ];
 
 const table = document.getElementById("booksTable");
@@ -40,15 +32,7 @@ const title = document.getElementById("title");
 const author = document.getElementById("author");
 const pages = document.getElementById("pages");
 const isRead = document.getElementById("status");
-
-displayBooks();
-
-function Book(title, author, pages, isRead) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.isRead = isRead;
-}
+const toggleBtns = document.getElementsByClassName("status");
 
 function addBookToLibray(title, author, pages, isRead) {
   let newBook = new Book(title, author, pages, isRead);
@@ -64,16 +48,16 @@ function displayBooks() {
          <td>${myLibrary[i].title}</td>
            <td>${myLibrary[i].author}</td>
            <td>${myLibrary[i].pages}</td>
-           <td><input class="status" type="checkbox" ${
-             myLibrary[i].isRead ? "checked" : ""
-           } /></td>
+           <td><input class="status" type="checkbox" data-index=${i} ${
+      myLibrary[i].isRead ? "checked" : ""
+    } /></td>
            <td><button class="deleteBtn" data-index=${i}>X</button></td>
        </tr>`;
     tableBody.innerHTML += row;
   }
 
-  const deleteBtn = document.getElementsByClassName("deleteBtn");
-  Array.from(deleteBtn).forEach((btn) => {
+  const deleteBtns = document.getElementsByClassName("deleteBtn");
+  Array.from(deleteBtns).forEach((btn) => {
     btn.addEventListener("click", (e) => {
       myLibrary.splice(e.target.getAttribute("data-index"), 1);
       displayBooks();
@@ -87,10 +71,20 @@ function resetForm() {
   form.reset();
 }
 
+// Display books from libraryArray
+displayBooks();
+
 form.addEventListener("submit", (e) => {
-  e.preventDefault();
+  e.preventDefault(); // Prevent form to be submitted
   addBookToLibray(title.value, author.value, pages.value, isRead.checked);
   resetForm();
+});
+
+Array.from(toggleBtns).forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    let i = e.target.getAttribute("data-index");
+    myLibrary[i].toggleBookStatus();
+  });
 });
 
 openFormBtn.addEventListener("click", () => {
