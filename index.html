@@ -11,7 +11,7 @@
   <body>
     <header class="container">
       <div id="logo">
-        <img src="#" alt="Book" />
+        <img src="./assets/library-shelves.svg" alt="Book" />
         <h1>Library</h1>
       </div>
     </header>
@@ -26,59 +26,60 @@
             <th>Author</th>
             <th>Pages</th>
             <th>Status</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody></tbody>
       </table>
-      <form action="#" method="post" id="addBookForm">
-        <h3>Add a book to the library</h3>
-        <hr />
-        <div class="form-group">
-          <label for="title"
-            >Title <span><strong>Required</strong></span></label
-          >
-          <input id="title" name="title" type="text" placeholder=" " required />
-          <div class="feedback">
-            <p>* Please enter the title of the book</p>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="author"
-            >Author <span><strong>Required</strong></span></label
-          >
-          <input
-            id="author"
-            name="author"
-            type="text"
-            placeholder=" "
-            pattern="([A-Z])\w+"
-            required
-          />
-          <div class="feedback"><p>* Please enter a valid name</p></div>
-        </div>
-        <div class="form-group">
-          <label for="pages"
-            >Pages <span><strong>Required</strong></span></label
-          >
-          <input
-            id="pages"
-            name="pages"
-            type="number"
-            min="0"
-            placeholder=" "
-            required
-          />
-          <div class="feedback"><p>* Please enter a positive number</p></div>
-        </div>
-        <div class="form-group">
-          <label for="status">Have you read it?</label>
-          <input id="status" name="status" type="checkbox" />
-        </div>
-        <button type="submit">Add Book</button>
-      </form>
-      <button id="openFormBtn"><span>+</span></button>
-      <div id="disableBackground"></div>
     </main>
+    <button id="openFormBtn"><span>+</span></button>
+    <form action="#" method="post" id="addBookForm">
+      <h3>Add a book to the library</h3>
+      <hr />
+      <div class="form-group">
+        <label for="title"
+          >Title <span><strong>Required</strong></span></label
+        >
+        <input id="title" name="title" type="text" placeholder=" " required />
+        <div class="feedback">
+          <p>* Please enter the title of the book</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="author"
+          >Author <span><strong>Required</strong></span></label
+        >
+        <input
+          id="author"
+          name="author"
+          type="text"
+          placeholder=" "
+          pattern="(^[a-zA-Z][a-zA-Z]{0,}([.'-]?[a-zA-Z ])+$)"
+          required
+        />
+        <div class="feedback"><p>* Please enter a valid name</p></div>
+      </div>
+      <div class="form-group">
+        <label for="pages"
+          >Pages <span><strong>Required</strong></span></label
+        >
+        <input
+          id="pages"
+          name="pages"
+          type="number"
+          min="0"
+          placeholder=" "
+          required
+        />
+        <div class="feedback"><p>* Please enter a positive number</p></div>
+      </div>
+      <div class="form-group">
+        <label for="status">Have you read it?</label>
+        <input id="status" name="status" type="checkbox" />
+      </div>
+      <button type="submit">Add Book</button>
+    </form>
+    <div id="disableBackground"></div>
     <footer class="container">
       <p>Copyright NYF</p>
     </footer>
