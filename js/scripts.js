@@ -11,18 +11,30 @@ class Book {
   }
 }
 
-let myLibrary = [
-  new Book("The Alchemist", "Paulo Coelho", 197, false),
-  new Book("Animal Farm", "George Orwell", 112, false),
-  new Book("The Art of War", "Sun Tzu", 273, true),
-  new Book("The Book Thief", "Markus Zusak", 584, false),
+class Library {
+  books = [];
+  addBook(book) {
+    this.books.push(book);
+  }
+
+  get books() {
+    return books;
+  }
+}
+
+let myLibrary = new Library();
+myLibrary.addBook(new Book("The Alchemist", "Paulo Coelho", 197, false));
+myLibrary.addBook(new Book("Animal Farm", "George Orwell", 112, false));
+myLibrary.addBook(new Book("The Art of War", "Sun Tzu", 273, true));
+myLibrary.addBook(new Book("The Book Thief", "Markus Zusak", 584, false));
+myLibrary.addBook(
   new Book(
     "The Curious Incident of the Dog in the Night-Time",
     "Mark Haddon",
     274,
     false
-  ),
-];
+  )
+);
 
 const table = document.getElementById("booksTable");
 const tableBody = document.querySelector("tbody");
@@ -35,22 +47,20 @@ const pages = document.getElementById("pages");
 const isRead = document.getElementById("status");
 const toggleBtns = document.getElementsByClassName("status");
 
-function addBookToLibray(title, author, pages, isRead) {
-  let newBook = new Book(title, author, pages, isRead);
-  myLibrary.push(newBook);
-  displayBooks();
-}
+// Display books from library
+displayBooks();
 
 function displayBooks() {
   tableBody.innerHTML = "";
+  let books = myLibrary.books;
 
-  for (let i = 0; i < myLibrary.length; i++) {
+  for (let i = 0; i < books.length; i++) {
     let row = `<tr>
-         <td>${myLibrary[i].title}</td>
-           <td>${myLibrary[i].author}</td>
-           <td>${myLibrary[i].pages}</td>
+         <td>${books[i].title}</td>
+           <td>${books[i].author}</td>
+           <td>${books[i].pages}</td>
            <td><input class="status" type="checkbox" data-index=${i} ${
-      myLibrary[i].isRead ? "checked" : ""
+      books[i].isRead ? "checked" : ""
     } /></td>
            <td><button class="deleteBtn" data-index=${i}>X</button></td>
        </tr>`;
@@ -72,13 +82,12 @@ function resetForm() {
   form.reset();
 }
 
-// Display books from libraryArray
-displayBooks();
-
 form.addEventListener("submit", (e) => {
   e.preventDefault(); // Prevent form to be submitted
-  addBookToLibray(title.value, author.value, pages.value, isRead.checked);
+  let book = new Book(title.value, author.value, pages.value, isRead.checked);
+  myLibrary.addBook(book);
   resetForm();
+  displayBooks();
 });
 
 Array.from(toggleBtns).forEach((btn) => {
