@@ -1,14 +1,15 @@
-// Create Book object constructor
-function Book(title, author, pages, isRead) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.isRead = isRead;
+class Book {
+  constructor(title, author, pages, isRead) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = isRead;
+  }
+
+  toggleBookStatus() {
+    this.isRead = !this.isRead;
+  }
 }
-// Add function to Book prototype
-Book.prototype.toggleBookStatus = function () {
-  this.isRead = !this.isRead;
-};
 
 let myLibrary = [
   new Book("The Alchemist", "Paulo Coelho", 197, false),
