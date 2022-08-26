@@ -33,7 +33,7 @@
       </table>
     </main>
     <button id="openFormBtn"><span>+</span></button>
-    <form action="#" method="post" id="addBookForm">
+    <form action="#" method="post" id="addBookForm" novalidate>
       <h3>Add a book to the library</h3>
       <hr />
       <div class="form-group">
@@ -42,7 +42,7 @@
         >
         <input id="title" name="title" type="text" placeholder=" " required />
         <div class="feedback">
-          <p>* Please enter the title of the book</p>
+          <p></p>
         </div>
       </div>
       <div class="form-group">
@@ -57,7 +57,7 @@
           pattern="(^[a-zA-Z][a-zA-Z]{0,}([.'-]?[a-zA-Z ])+$)"
           required
         />
-        <div class="feedback"><p>* Please enter a valid name</p></div>
+        <div class="feedback"><p></p></div>
       </div>
       <div class="form-group">
         <label for="pages"
@@ -71,7 +71,7 @@
           placeholder=" "
           required
         />
-        <div class="feedback"><p>* Please enter a positive number</p></div>
+        <div class="feedback"><p></p></div>
       </div>
       <div class="form-group">
         <label for="status">Have you read it?</label>

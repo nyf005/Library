@@ -41,10 +41,12 @@ const tableBody = document.querySelector("tbody");
 const openFormBtn = document.getElementById("openFormBtn");
 const disableBackground = document.getElementById("disableBackground");
 const form = document.querySelector("form");
+
 const title = document.getElementById("title");
 const author = document.getElementById("author");
 const pages = document.getElementById("pages");
 const isRead = document.getElementById("status");
+
 const toggleBtns = document.getElementsByClassName("status");
 
 // Display books from library
@@ -82,12 +84,66 @@ function resetForm() {
   form.reset();
 }
 
+function validateTitleInput(titleInput) {
+  titleInput.setCustomValidity("");
+  if (titleInput.validity.valueMissing) {
+    titleInput.setCustomValidity("The title of the book is required.");
+  }
+  titleInput.reportValidity();
+
+  return title.reportValidity();
+}
+
+function validateAuthorInput(authorInput) {
+  const feedback = authorInput.parentElement.querySelector(".feedback p");
+  authorInput.setCustomValidity("");
+
+  if (authorInput.validity.valueMissing) {
+    authorInput.setCustomValidity("The author name is required.");
+  } else if (authorInput.validity.patternMismatch) {
+    feedback.textContent =
+      "The author name should contain more than one alphabetical characters and/or special characters . and -";
+
+    // setCutomValidity sets the message
+    authorInput.setCustomValidity(feedback.textContent);
+  }
+  // Report validity is used to display the message to the popup message and mark the field as invalid
+  authorInput.reportValidity();
+
+  return authorInput.reportValidity();
+}
+
+function validatePagesInput(pagesInput) {
+  const feedback = pagesInput.parentElement.querySelector(".feedback p");
+  pagesInput.setCustomValidity("");
+  if (pagesInput.validity.badInput) {
+    feedback.textContent = "Pages input should only contain numeric characters";
+
+    pagesInput.setCustomValidity(feedback.textContent);
+  }
+
+  pagesInput.reportValidity();
+
+  return pagesInput.reportValidity();
+}
+
+title.addEventListener("change", () => validateTitleInput(title));
+author.addEventListener("input", () => validateAuthorInput(author));
+pages.addEventListener("input", () => validatePagesInput(pages));
+
 form.addEventListener("submit", (e) => {
   e.preventDefault(); // Prevent form to be submitted
-  let book = new Book(title.value, author.value, pages.value, isRead.checked);
-  myLibrary.addBook(book);
-  resetForm();
-  displayBooks();
+  if (
+    validateTitleInput(title) &&
+    validateAuthorInput(author) &&
+    validatePagesInput(pages)
+  ) {
+    let book = new Book(title.value, author.value, pages.value, isRead.checked);
+
+    myLibrary.addBook(book);
+    resetForm();
+    displayBooks();
+  }
 });
 
 Array.from(toggleBtns).forEach((btn) => {
