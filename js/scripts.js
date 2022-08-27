@@ -84,7 +84,7 @@ function resetForm() {
   form.reset();
 }
 
-function validateTitleInput(titleInput) {
+const validateTitleOnChange = (titleInput) => {
   titleInput.setCustomValidity("");
   if (titleInput.validity.valueMissing) {
     titleInput.setCustomValidity("The title of the book is required.");
@@ -92,9 +92,9 @@ function validateTitleInput(titleInput) {
   titleInput.reportValidity();
 
   return title.reportValidity();
-}
+};
 
-function validateAuthorInput(authorInput) {
+const validateAuthorOnInput = (authorInput) => {
   const feedback = authorInput.parentElement.querySelector(".feedback p");
   authorInput.setCustomValidity("");
 
@@ -111,11 +111,12 @@ function validateAuthorInput(authorInput) {
   authorInput.reportValidity();
 
   return authorInput.reportValidity();
-}
+};
 
-function validatePagesInput(pagesInput) {
+const validatePagesOnInput = (pagesInput) => {
   const feedback = pagesInput.parentElement.querySelector(".feedback p");
   pagesInput.setCustomValidity("");
+  console.log(pages.validity);
   if (pagesInput.validity.badInput) {
     feedback.textContent = "Pages input should only contain numeric characters";
 
@@ -125,18 +126,21 @@ function validatePagesInput(pagesInput) {
   pagesInput.reportValidity();
 
   return pagesInput.reportValidity();
-}
+};
 
-title.addEventListener("change", () => validateTitleInput(title));
-author.addEventListener("input", () => validateAuthorInput(author));
-pages.addEventListener("input", () => validatePagesInput(pages));
+title.addEventListener("change", () => validateTitleOnChange(title));
+title.addEventListener("input", () => validateTitleOnChange(title));
+
+author.addEventListener("input", () => validateAuthorOnInput(author));
+pages.addEventListener("input", () => validatePagesOnInput(pages));
 
 form.addEventListener("submit", (e) => {
   e.preventDefault(); // Prevent form to be submitted
+
   if (
-    validateTitleInput(title) &&
-    validateAuthorInput(author) &&
-    validatePagesInput(pages)
+    validateTitleOnChange(title) &&
+    validateAuthorOnInput(author) &&
+    validatePagesOnInput(pages)
   ) {
     let book = new Book(title.value, author.value, pages.value, isRead.checked);
 
