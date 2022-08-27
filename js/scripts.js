@@ -116,7 +116,6 @@ const validateAuthorOnInput = (authorInput) => {
 const validatePagesOnInput = (pagesInput) => {
   const feedback = pagesInput.parentElement.querySelector(".feedback p");
   pagesInput.setCustomValidity("");
-  console.log(pages.validity);
   if (pagesInput.validity.badInput) {
     feedback.textContent = "Pages input should only contain numeric characters";
 
